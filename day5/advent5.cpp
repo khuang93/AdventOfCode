@@ -15,7 +15,7 @@ int main(){
 ifstream in;
 
 
-in.open("input.1.txt");
+in.open("input.txt");
 char curr;
 char next;
 
@@ -25,14 +25,18 @@ char next;
 
     while(!in.eof()){
         in >> next;
-        cout<<curr<<next<<endl;
+        // cout<<curr<<next<<endl;
         if(!react(curr, next)){
-            output.push(curr);
-            curr=next;
-        }else if(!output.empty()&&react(curr, output.top())){
-            output.pop();
-            in>>curr;
-        }else{
+            if(!output.empty()&&react(curr, output.top())){
+                output.pop();
+                // in>>curr;
+                curr=next; 
+                // cout<<curr<<endl;
+            }else{
+                output.push(curr);
+                curr=next;  
+            }     
+        }else if(react(curr,next)){
             in>>curr;
         }
     }
